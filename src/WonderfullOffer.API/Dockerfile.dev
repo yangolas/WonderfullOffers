@@ -1,0 +1,31 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["WonderfullOffer.API/WonderfullOffer.API.csproj", "WonderfullOffer.API/"]
+COPY ["Job/JobWork.csproj", "Job/"]
+COPY ["WonderfullOffers.Domain.Contracts/WonderfullOffers.Domain.Contracts.csproj", "WonderfullOffers.Domain.Contracts/"]
+COPY ["WonderfullOffers.Domain.Models/WonderfullOffers.Domain.Models.csproj", "WonderfullOffers.Domain.Models/"]
+COPY ["WonderfullOffers.Infraestructure/WonderfullOffers.Infraestructure.csproj", "WonderfullOffers.Infraestructure/"]
+COPY ["WonderfullOffer.Api.Models/WonderfullOffer.Api.Models.csproj", "WonderfullOffer.Api.Models/"]
+COPY ["WonderfullOffers.Domain/WonderfullOffers.Domain.csproj", "WonderfullOffers.Domain/"]
+COPY ["WonderfullOffers.Application/WonderfullOffers.Application.csproj", "WonderfullOffers.Application/"]
+COPY ["WonderfullOffers.Application.Contracts/WonderfullOffers.Application.Contracts.csproj", "WonderfullOffers.Application.Contracts/"]
+COPY ["WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
+RUN dotnet restore "WonderfullOffer.API/WonderfullOffer.API.csproj"
+COPY . .
+WORKDIR "/src/WonderfullOffer.API"
+RUN dotnet build "WonderfullOffer.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "WonderfullOffer.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WonderfullOffer.API.dll"]
