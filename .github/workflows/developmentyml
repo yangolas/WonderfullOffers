@@ -1,0 +1,20 @@
+name: Compilación en Docker - Development
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Construir imagen Docker - Development
+      run: docker build -t nombre-de-imagen-dev -f Dockerfile.dev .
+
+    - name: Ejecutar contenedor Docker - Development
+      run: docker run -p puerto-host:puerto-contenedor nombre-de-imagen-dev
