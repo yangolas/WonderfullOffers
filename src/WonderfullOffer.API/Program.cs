@@ -15,7 +15,7 @@ builder.Configuration
     .Build();
 
 //This only for using http no https
-if (builder.Environment.EnvironmentName == "Production")
+if (builder.Environment.EnvironmentName == "Production") 
 {
     builder.WebHost.ConfigureKestrel(options =>
     {
