@@ -28,7 +28,8 @@ jobs:
 
     - name: Merge to branch 'production'
       run: |
-        git checkout production
+        git checkout origin/production
+        git merge origin/development
 
     - name: Push to branch 'production'
       run: git push origin production
