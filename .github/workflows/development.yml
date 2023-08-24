@@ -28,9 +28,7 @@ jobs:
 
     - name: Merge to branch 'production'
       run: |
-        echo "Checking out production branch..."
         git checkout production
-        echo "Merging origin/development into production..."
         git merge origin/development
 
     - name: Push to branch 'production'
