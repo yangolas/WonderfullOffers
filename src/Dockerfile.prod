@@ -15,7 +15,6 @@ COPY ["WonderfullOffer.Api.Models/WonderfullOffer.Api.Models.csproj", "Wonderful
 COPY ["WonderfullOffers.Domain/WonderfullOffers.Domain.csproj", "WonderfullOffers.Domain/"]
 COPY ["WonderfullOffers.Application/WonderfullOffers.Application.csproj", "WonderfullOffers.Application/"]
 COPY ["WonderfullOffers.Application.Contracts/WonderfullOffers.Application.Contracts.csproj", "WonderfullOffers.Application.Contracts/"]
-COPY ["WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
 RUN dotnet restore "WonderfullOffer.API/WonderfullOffer.API.csproj"
 COPY . .
 WORKDIR "/src/WonderfullOffer.API"
@@ -27,4 +26,4 @@ RUN dotnet publish "WonderfullOffer.API.csproj" -c Release -o /app/publish /p:Us
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WonderfullOffer.API.dll"] 
+ENTRYPOINT ["dotnet", "WonderfullOffer.API.dll"]
