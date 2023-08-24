@@ -31,7 +31,10 @@ jobs:
 
     - name: Build image Docker - production
       working-directory: ./src
-      run: docker build -t yangolas/wonderfulloffers:1.0 -f Dockerfile.prod .
+      run: |
+        docker build -t yangolas/wonderfulloffers:1.0 -f Dockerfile.prod .
+        docker tag yangolas/wonderfulloffers:1.0 yangolas/wonderfulloffersapi:1.0
+
 
     - name: Upload image Docker Hub
-      run: docker push wonderfulloffersapi
+      run: docker push yangolas/wonderfulloffersapi:1.0
