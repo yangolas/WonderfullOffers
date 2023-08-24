@@ -8,7 +8,7 @@ using WonderfullOffers.Infraestructure;
 
 public partial class Program 
 {
-    static void Main(string[] args) 
+    public static void Main(string[] args) 
     {
         var builder = WebApplication.CreateBuilder(args);
 
