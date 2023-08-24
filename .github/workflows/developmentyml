@@ -3,7 +3,7 @@ name: Compilación .Net6, merge with production and upload docker img in docker 
 on:
   push:
     branches:
-      - development
+      - Development
 
 jobs:
   build_and_deploy:
@@ -25,10 +25,10 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Merge to branch 'Production'
-      run: git merge origin/produccion
+      run: git merge origin/Production
 
     - name: Push to branch 'Production'
-      run: git push origin development:production 
+      run: git push origin development:Production 
 
     - name: log in in Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
