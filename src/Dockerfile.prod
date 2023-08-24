@@ -5,20 +5,20 @@ WORKDIR /app
 EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR .
-COPY ["WonderfullOffer.API/WonderfullOffer.API.csproj", "WonderfullOffer.API/"]
-COPY ["Job/JobWork.csproj", "Job/"]
-COPY ["WonderfullOffers.Domain.Contracts/WonderfullOffers.Domain.Contracts.csproj", "WonderfullOffers.Domain.Contracts/"]
-COPY ["WonderfullOffers.Domain.Models/WonderfullOffers.Domain.Models.csproj", "WonderfullOffers.Domain.Models/"]
-COPY ["WonderfullOffers.Infraestructure/WonderfullOffers.Infraestructure.csproj", "WonderfullOffers.Infraestructure/"]
-COPY ["WonderfullOffer.Api.Models/WonderfullOffer.Api.Models.csproj", "WonderfullOffer.Api.Models/"]
-COPY ["WonderfullOffers.Domain/WonderfullOffers.Domain.csproj", "WonderfullOffers.Domain/"]
-COPY ["WonderfullOffers.Application/WonderfullOffers.Application.csproj", "WonderfullOffers.Application/"]
-COPY ["WonderfullOffers.Application.Contracts/WonderfullOffers.Application.Contracts.csproj", "WonderfullOffers.Application.Contracts/"]
-COPY ["WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
+WORKDIR /src
+COPY ["src/WonderfullOffer.API/WonderfullOffer.API.csproj", "WonderfullOffer.API/"]
+COPY ["src/Job/JobWork.csproj", "Job/"]
+COPY ["src/WonderfullOffers.Domain.Contracts/WonderfullOffers.Domain.Contracts.csproj", "WonderfullOffers.Domain.Contracts/"]
+COPY ["src/WonderfullOffers.Domain.Models/WonderfullOffers.Domain.Models.csproj", "WonderfullOffers.Domain.Models/"]
+COPY ["src/WonderfullOffers.Infraestructure/WonderfullOffers.Infraestructure.csproj", "WonderfullOffers.Infraestructure/"]
+COPY ["src/WonderfullOffer.Api.Models/WonderfullOffer.Api.Models.csproj", "WonderfullOffer.Api.Models/"]
+COPY ["src/WonderfullOffers.Domain/WonderfullOffers.Domain.csproj", "WonderfullOffers.Domain/"]
+COPY ["src/WonderfullOffers.Application/WonderfullOffers.Application.csproj", "WonderfullOffers.Application/"]
+COPY ["src/WonderfullOffers.Application.Contracts/WonderfullOffers.Application.Contracts.csproj", "WonderfullOffers.Application.Contracts/"]
+COPY ["src/WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
 RUN dotnet restore "WonderfullOffer.API/WonderfullOffer.API.csproj"
 COPY . .
-WORKDIR "./WonderfullOffer.API"
+WORKDIR "/src/WonderfullOffer.API"
 RUN dotnet build "WonderfullOffer.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
