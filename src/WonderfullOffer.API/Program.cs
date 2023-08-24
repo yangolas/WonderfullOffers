@@ -6,10 +6,10 @@ using WonderfullOffers.Application;
 using WonderfullOffers.Domain;
 using WonderfullOffers.Infraestructure;
 
-public partial class Program 
-{
-    public static void Main(string[] args) 
-    {
+//public partial class Program 
+//{
+//    public static void Main(string[] args) 
+//    {
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Configuration
@@ -86,5 +86,5 @@ public partial class Program
         app.MapControllers();
 
         app.Run();
-    }
-}
+//    }
+//}
