@@ -23,6 +23,7 @@ jobs:
 
     - name: build project
       run: dotnet build --configuration Release
+      working-directory: ./src
 
     - name: Merge to branch 'production'
       run: git merge origin/production
