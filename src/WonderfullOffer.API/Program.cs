@@ -6,7 +6,8 @@ using WonderfullOffers.Application;
 using WonderfullOffers.Domain;
 using WonderfullOffers.Infraestructure;
 
-static async Task Main(string[] args) 
+Main(new string[] { });
+static void Main(string[] args) 
 {
     var builder = WebApplication.CreateBuilder(args);
 
