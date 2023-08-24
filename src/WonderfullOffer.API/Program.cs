@@ -24,21 +24,20 @@ if (builder.Environment.EnvironmentName == "Production")
 }
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddQuartz(q =>
 {
     q.UseMicrosoftDependencyInjectionJobFactory();
-    // Just use the name of your job that you created in the Jobs folder.
+
     var jobKey = new JobKey("ProcessWebCompany");
     q.AddJob<JobWorkAction>(opts => opts.WithIdentity(jobKey));
 
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("ProcessWebCompany")
-        //This Cron interval can be described as "run every minute" (when second is zero)
         .WithCronSchedule("* 00 00 ? * *")
     );
 });
