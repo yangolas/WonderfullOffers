@@ -7,7 +7,7 @@ using WonderfullOffers.Domain;
 using WonderfullOffers.Infraestructure;
 
 Main(new string[] { });
-static void Main(string[] args) 
+void Main(string[] args) 
 {
     var builder = WebApplication.CreateBuilder(args);
 
