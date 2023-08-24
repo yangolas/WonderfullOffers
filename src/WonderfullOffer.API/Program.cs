@@ -69,7 +69,6 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 app.UseCors();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
