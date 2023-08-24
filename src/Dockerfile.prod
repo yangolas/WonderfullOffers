@@ -5,7 +5,7 @@ WORKDIR /app
 EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
+WORKDIR .
 COPY ["WonderfullOffer.API/WonderfullOffer.API.csproj", "WonderfullOffer.API/"]
 COPY ["Job/JobWork.csproj", "Job/"]
 COPY ["WonderfullOffers.Domain.Contracts/WonderfullOffers.Domain.Contracts.csproj", "WonderfullOffers.Domain.Contracts/"]
@@ -15,9 +15,10 @@ COPY ["WonderfullOffer.Api.Models/WonderfullOffer.Api.Models.csproj", "Wonderful
 COPY ["WonderfullOffers.Domain/WonderfullOffers.Domain.csproj", "WonderfullOffers.Domain/"]
 COPY ["WonderfullOffers.Application/WonderfullOffers.Application.csproj", "WonderfullOffers.Application/"]
 COPY ["WonderfullOffers.Application.Contracts/WonderfullOffers.Application.Contracts.csproj", "WonderfullOffers.Application.Contracts/"]
+COPY ["WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
 RUN dotnet restore "WonderfullOffer.API/WonderfullOffer.API.csproj"
 COPY . .
-WORKDIR "/src/WonderfullOffer.API"
+WORKDIR "./WonderfullOffer.API"
 RUN dotnet build "WonderfullOffer.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
