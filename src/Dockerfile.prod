@@ -18,8 +18,8 @@ COPY ["src/WonderfullOffers.Application.Contracts/WonderfullOffers.Application.C
 COPY ["src/WonderfullOffers.Application.Models/WonderfullOffers.Application.Models.csproj", "WonderfullOffers.Application.Models/"]
 RUN dotnet restore "WonderfullOffer.API/WonderfullOffer.API.csproj"
 COPY . .
-WORKDIR "/WonderfullOffer.API"
-RUN dotnet build "WonderfullOffer.API.csproj" -c Release -o /app/build
+WORKDIR "/src/WonderfullOffer.API"
+RUN dotnet build "WonderfullOffer.API.csproj" -c Release -o out -r linux-x64
 
 FROM build AS publish
 RUN dotnet publish "WonderfullOffer.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
