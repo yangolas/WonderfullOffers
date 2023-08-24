@@ -6,6 +6,8 @@ using WonderfullOffers.Application;
 using WonderfullOffers.Domain;
 using WonderfullOffers.Infraestructure;
 
+static void Main() {}
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
