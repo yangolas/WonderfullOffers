@@ -27,7 +27,11 @@ jobs:
       working-directory: ./src
 
     - name: Merge to branch 'production'
-      run: git checkout production && git merge origin/development
+      run: |
+        echo "Checking out production branch..."
+        git checkout production
+        echo "Merging origin/development into production..."
+        git merge origin/development
 
     - name: Push to branch 'production'
       run: git push origin production
