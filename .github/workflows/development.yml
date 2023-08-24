@@ -26,17 +26,11 @@ jobs:
       run: dotnet build --configuration Release
       working-directory: ./src
 
-    - name: Merge to branch 'production'
-      run: git merge origin/production
-
-    - name: Push to branch 'production'
-      run: git push origin development:production 
-
     - name: log in in Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build image Docker - production
-      run: docker build -t yangolas/wonderfulloffers:1.0 -f Dockerfile.prod .
+      run: docker build -t yangolas/wonderfulloffers:1.0 -f src/Dockerfile.prod .
 
     - name: Upload image Docker Hub
       run: docker push wonderfulloffersapi
