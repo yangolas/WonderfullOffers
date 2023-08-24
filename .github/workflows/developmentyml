@@ -1,0 +1,40 @@
+name: Compilación en Docker - Development
+
+on:
+  push:
+    branches:
+      - development
+
+obs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0  # Asegúrate de ajustar la versión a la que estás utilizando
+
+    - name: Restaurar paquetes NuGet
+      run: dotnet restore
+
+    - name: Compilar el proyecto
+      run: dotnet build --configuration Release
+
+    - name: Merge a la rama 'Production'
+      run: git merge origin/produccion  # Asegúrate de ajustar el comando según tu flujo de trabajo
+
+    - name: Push a la rama 'Production'
+      run: git push origin development:production  # Ajusta los nombres de las ramas según tu configuración
+
+    - name: Iniciar sesión en Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Construir imagen Docker - Production
+      run: docker build -t yangolas/wonderfulloffers:1.0 -f Dockerfile.prod .
+
+    - name: Subir imagen a Docker Hub
+      run: docker push wonderfulloffersapi
