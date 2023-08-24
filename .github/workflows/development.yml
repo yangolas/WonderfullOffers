@@ -30,7 +30,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build image Docker - production
-      run: docker build -t yangolas/wonderfulloffers:1.0 -f Dockerfile.prod .
+      run: docker build -t yangolas/wonderfulloffers:1.0 -f src/WonderfullOffer.API/Dockerfile.prod .
 
     - name: Upload image Docker Hub
       run: docker push wonderfulloffersapi
